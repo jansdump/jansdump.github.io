@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,18 +11,235 @@
 		<link rel="stylesheet" href="dist/theme/night.css">
 
 		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="plugin/highlight/zenburn.css">
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h2 class="r-fit-text">Die Progammiersprache</h2>
-					<h1 class="r-fit-text">RUST</h1>
+					<h3>Die Progammiersprache</h3>
+					<h1>RUST</h1>
+					<img class="r-stretch" data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Cuddlyferris.svg/512px-Cuddlyferris.svg.png?20200229163036">
+					<table>
+						<tr>
+							<td>INF 12 Zaionc</td>
+							<td>Jan Bauer</td>
+						</tr>
+					</table>
+				</section>
+				<section style="text-align: center;" data-markdown>
+					<textarea data-template>
+						## Historie
+						- wurde 2009 als Projekt bei Mozilla gestartet <!-- .element class="fragment"-->
+						- erste stabile Version 1.0 am 15. Mai 2015 veröffentlicht <!-- .element class="fragment"-->
+						- Entlassungen von Mozilla Mitarbeitern 2020 <!-- .element class="fragment"-->
+						- Gründung der Rust-Foundation am 8. Februar 2021 <!-- .element class="fragment"-->
+					</textarea>
+				</section>
+				<section data-background-image="./media/rust-lang-org-frontpage.png"></section>
+				<section style="text-align: left;" data-markdown>
+					<textarea data-template>
+						# PERFORMANCE <!-- .element class="r-fit-text"-->
+						---
+						System-Programmiersprache
+
+						z.B. für Embedded, Kernel, Simulationen
+						
+						als Alternative für C/C++
+					</textarea>
 				</section>
 				<section>
-					
+					<section style="text-align: center;" data-markdown>
+						<textarea data-template>
+							## Performance Vergleich zu anderen Sprachen
+
+							---
+
+							```rust
+							fn fibonacci(n: i32) -> u64 {
+								if n < 1 {
+									panic!("error!");
+								}
+							
+								let mut sum = 0;
+								let mut last = 0;
+								let mut curr = 1;
+								for i in 1..n {
+									sum = last + curr;
+									last = curr;
+									curr = sum;
+								}
+								sum
+							}
+							```
+						</textarea>
+					</section>
+					<section data-background-iframe="https://www.rustexplorer.com/b#Zm4gbWFpbigpIHsKICAgIGxldCByZXN1bHQgPSBmaWJvbmFjY2koMTg2KTsKICAgIHByaW50bG4hKCJmaWJvbmFjY2k6Iik7CiAgICBwcmludGxuISgie30iLCByZXN1bHQpOwp9CgpmbiBmaWJvbmFjY2kobjogaTMyKSAtPiB1MTI4IHsKCWlmIG4gPCAxIHsKCQlwYW5pYyEoImVycm9yISIpOwoJfQoJCQkJCQkKCWxldCBtdXQgc3VtID0gMDsKCWxldCBtdXQgbGFzdCA9IDA7CiAgICBsZXQgbXV0IGN1cnIgPSAxOwoJZm9yIF9pIGluIDEuLm4gewoJCXN1bSA9IGxhc3QgKyBjdXJyOwoJCWxhc3QgPSBjdXJyOwoJCWN1cnIgPSBzdW07Cgl9CiAgICBzdW0KfQ=="></section>
+					<section style="text-align: left;" data-markdown>
+						<textarea data-template>
+
+							### Ergebnisse
+
+							| *n* | Rust | C/C++ | Java | Python |
+							| --- | ---- | ----- | ---- | ------ |
+							| 10 |      | | | |
+							| 100
+							| 10.000
+							| 1.000.000
+
+							---
+
+							### Gründe
+
+							- Java und Python benötigen eine *Runtime* -> neben dem eigenen Code läuft noch anderer Code im Hintergrund
+
+							- C/C++ und Rust haben keine Runtime -> das, was geschrieben wird, wird auch ausgeführt
+						</textarea>
+					</section>
 				</section>
+				<section style="text-align: left;">
+					<h1 class="r-fit-text">RELIABILITY</h1>
+				</section>
+				<section>
+					<section>
+						<h2>Probleme beim Speichermanagment</h2>
+					</section>
+					<section>
+						<img class="r-frame" src="https://www.oreilly.com/api/v2/epubs/9781788390019/files/assets/f4ed44f6-fd70-4e90-bc1b-7034727b7fb8.png">
+					</section>
+					<section data-background-image="https://image.slidesharecdn.com/memorysafetyinrust-191222093701/75/Memory-safety-in-rust-15-2048.jpg"></section>
+				</section>
+				<section>
+					<section style="text-align: left;" data-markdown>
+						<textarea data-template>
+							### Vermeidung dieser Fehler <!-- style="text-align:center;" -->
+
+							---
+							
+							#### Ownershipregeln:
+	
+							1. Jede Variable hat einen *Besitzer*
+							2. Es kann zu jedem Zeitpunkt nur einen Besitzer geben
+							3. Wenn der Besitzer nicht mehr erreichbar ist, wird die Variable gelöscht
+							
+							---
+	
+							#### Referenzregeln:
+	
+							1. Es darf zu jedem Zeitpunkt entweder eine veränderliche Referenz ODER unbegrenzt viele nicht veränderliche Referenzen geben
+							2. Eine Referenz muss immer valide sein 
+							
+						</textarea>
+					</section>
+					<section data-auto-animate>
+						<pre data-id="reference-example"><code data-trim data-line-numbers>
+							fn main() {
+								let name = String::from("Herbert");
+								print_text(name);
+								print_text(name);
+							}
+							
+							fn print_text(name: String) {
+								println!("{}", name);
+							}
+						</code></pre>
+					</section>
+					<section data-auto-animate><!-- .element class="fragment"-->
+							}
+							
+							fn print_text(name: &String) {
+								println!("{}", name);
+							}
+						</code></pre>
+					</section>
+					<section data-auto-animate>
+						<pre data-id="reference-example"><code data-trim data-line-numbers data-line-numbers="1-15|3,5|1-15">
+							fn main() {
+								let mut name = String::from("Herbert");
+								let reference = &name;
+								print_text(reference);
+								add_second_name(&mut name);
+								print_text(reference);
+							}
+							
+							fn print_text(name: &String) {
+								println!("{}", name);
+							}
+							
+							fn add_second_name(name: &mut String) {
+								name.push_str("Hans");
+							}
+						</code></pre>
+					</section>
+					<section data-auto-animate>
+						<pre data-id="reference-example"><code data-trim data-line-numbers>
+							fn main() {
+								let mut name = String::from("Herbert");
+								print_text(&name);
+								add_second_name(&mut name);
+								print_text(&name);
+							}
+							
+							fn print_text(name: &String) {
+								println!("{}", name);
+							}
+							
+							fn add_second_name(name: &mut String) {
+								name.push_str("Hans");
+							}
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section style="text-align: left;" data-markdown>
+						<textarea data-template>
+							## Andere Sicherheitsfeatures
+							
+							---
+
+							### Result-Typ
+							
+							- Bei Funktionen, bei denen es möglich ist, dass ein Fehler entsteht
+							- Zwingt Benutzer, sich um den möglichen Fehler zu kümmern
+							
+							```rust
+							enum Result<T, E> {
+								Ok(T),
+								Err(E),
+							 }
+							```
+							<!-- .element class="fragment"-->
+							
+							---
+
+							### Option-Typ
+
+							- Bei Funktionen, bei denen es möglich ist, dass kein Wert zurückgegeben werden kann
+							- Zwingt Benutzer, sich richtig um diesen Fall zu kümmern
+
+							```rust
+							fn divide(numerator: f64, denominator: f64) -> Option<f64> {
+								if denominator == 0.0 {
+									None
+								} else {
+									Some(numerator / denominator)
+								}
+							}
+							``` 
+							<!-- .element class="fragment"-->
+
+							---
+
+							→ Häufige Fehler werden vermieden
+
+							→ macht Programme sicherer und zuverlässiger							
+
+
+						</textarea>
+					</section>
+				</section>
+				<section><h1 class="r-fit-text">PRODUCTIVITY</h1></section>
+
 			</div>
 		</div>
 
@@ -36,7 +253,7 @@
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
-
+				
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
