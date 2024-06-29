@@ -1,0 +1,6 @@
+- [Offizielle Rust-Seite](https://rust-lang.org)
+- [Offizielles Rust Buch zum Lernen](https://doc.rust-lang.org/book/)
+- [Rust Buch Version mit Quiz-Fragen](https://rust-book.cs.brown.edu/)
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)
+- [Rustlings](https://github.com/rust-lang/rustlings?tab=readme-ov-file)
+- [Offizielle Dokumentation](https://doc.rust-lang.org/)

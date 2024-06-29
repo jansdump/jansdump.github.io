@@ -4,6 +4,7 @@ Präsentation zur Programmiersprache [Rust](https://rust-lang.org)
 
 - [Notizen](https://github.com/jansdump/jansdump.github.io/blob/main/Rust%20GFS.md)
 - [Quellen](https://github.com/jansdump/jansdump.github.io/blob/main/Quellen.md)
+- [Hilfreiche Links](https://github.com/jansdump/jansdump.github.io/blob/main/Links.md)
 
 ---
 

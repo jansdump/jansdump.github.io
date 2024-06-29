@@ -27,14 +27,19 @@
 						</tr>
 					</table>
 				</section>
-				<section style="text-align: center;" data-markdown>
-					<textarea data-template>
-						## Historie
-						- wurde 2009 als Projekt bei Mozilla gestartet <!-- .element class="fragment"-->
-						- erste stabile Version 1.0 am 15. Mai 2015 veröffentlicht <!-- .element class="fragment"-->
-						- Entlassungen von Mozilla Mitarbeitern 2020 <!-- .element class="fragment"-->
-						- Gründung der Rust-Foundation am 8. Februar 2021 <!-- .element class="fragment"-->
-					</textarea>
+				<section>
+					<section style="text-align: center;" data-markdown>
+						<textarea data-template>
+							## Historie
+
+							- wurde 2009 als Projekt bei Mozilla gestartet <!-- .element class="fragment"-->
+							- erste stabile Version 1.0 am 15. Mai 2015 veröffentlicht <!-- .element class="fragment"-->
+							- Entlassungen von Mozilla Mitarbeitern 2020 <!-- .element class="fragment"-->
+							- Gründung der Rust-Foundation am 8. Februar 2021 <!-- .element class="fragment"-->
+
+							
+						</textarea>
+					</section>
 				</section>
 				<section data-background-image="./media/rust-lang-org-frontpage.png"></section>
 				<section style="text-align: left;" data-markdown>
@@ -144,7 +149,12 @@
 							}
 						</code></pre>
 					</section>
-					<section data-auto-animate><!-- .element class="fragment"-->
+					<section data-auto-animate>
+						<pre data-id="reference-example"><code data-trim data-line-numbers>
+							fn main() {
+								let name = String::from("Herbert");
+								print_text(&name);
+								print_text(&name);
 							}
 							
 							fn print_text(name: &String) {
@@ -239,14 +249,27 @@
 					</section>
 				</section>
 				<section><h1 class="r-fit-text">PRODUCTIVITY</h1></section>
+
+
+				<section><h1 class="r-fit-text">SCHLUSS</h1></section>
 				<section>
 					<section style="text-align: left;" data-markdown>
 						<textarea data-template>
-							## Projekte
+							## Anwendungen in der realen Welt
+							
+							- Linux-Kernel
+							- Zed-Editor
+							- Cosmic-Desktop
+							- Bevy-Engine
 
 							---
 
-							Linux-Kernel hat Rust als
+							## Wo starten?
+
+							- Rust-Buch
+							- Rust by Example
+							- Rustlings
+
 						</textarea>
 					</section>
 				</section>
