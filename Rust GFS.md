@@ -170,7 +170,18 @@ fn add_second_name(name: &mut String) {
 
 ## Productivity
 
-*TBA*
+- ist der strittiste Punkt, denn es sprechen einige Punkte dafür, einige dagegen:
+
+### Dafür:
+
+- kompakter, bekannter Syntax
+- Fehlernachrichten sind WIRKLICH hilfreich
+- Regeln vermeiden Fehler, die gedebuggt werden müssen
+
+### Dagegen:
+
+- Regeln halten einen auf, man muss darüber nachdenken, wie man den Compiler zufriedenstellt
+- "Fight the Borrow-Checker"
 
 ---
 

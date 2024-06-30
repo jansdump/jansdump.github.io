@@ -6,7 +6,7 @@ Es wurde immer die Release-Build Option ausgewählt. Die CPU war immer ein Intel
 Der Test bestand darin, die n-te Zahl der Fibonacci-Folge zu berechnen.
 Hierfür wurde der folgende Algorithmus verwendet (Pseudocode, abgewandelt für jede Sprache):
 
-'''
+```
 fib(n) {
     f0 = 0
     f1 = 1
@@ -19,7 +19,7 @@ fib(n) {
 
     return f0
 }
-'''
+```
 
 Für jeden Aufruf dieser Funktion wurde die Zeit berechnet, die zum Berechnen benötigt wurde.
 
