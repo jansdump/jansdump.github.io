@@ -115,6 +115,7 @@
 						<img class="r-frame" src="https://www.oreilly.com/api/v2/epubs/9781788390019/files/assets/f4ed44f6-fd70-4e90-bc1b-7034727b7fb8.png">
 					</section>
 					<section data-background-image="https://image.slidesharecdn.com/memorysafetyinrust-191222093701/75/Memory-safety-in-rust-15-2048.jpg"></section>
+					
 				</section>
 				<section>
 					<section style="text-align: left;" data-markdown>
@@ -214,11 +215,18 @@
 							- Bei Funktionen, bei denen es möglich ist, dass ein Fehler entsteht
 							- Zwingt Benutzer, sich um den möglichen Fehler zu kümmern
 							
-							```rust
+							```rust[1-11|1-4|5-11|7,9]
 							enum Result<T, E> {
 								Ok(T),
 								Err(E),
-							 }
+							}
+							fn divide(x: f32, y: f32) -> Result<f32, &'static str> {
+								if y == 0.0 {
+									Err("tried to divide by zero")
+								} else {
+									Ok(x/y)
+								}
+							}
 							```
 							<!-- .element class="fragment"-->
 							
@@ -228,13 +236,16 @@
 
 							- Bei Funktionen, bei denen es möglich ist, dass kein Wert zurückgegeben werden kann
 							- Zwingt Benutzer, sich richtig um diesen Fall zu kümmern
+							- Verhindert zum Beispiel *Out-Of-Bounds*-Fehler
 
 							```rust
-							fn divide(numerator: f64, denominator: f64) -> Option<f64> {
-								if denominator == 0.0 {
-									None
-								} else {
-									Some(numerator / denominator)
+							fn main() {
+								let array: [i32; 3] = [10, 20, 30];
+								let non_existing: Option<&i32> = array.get(4);
+
+								match non_existing {
+									None => println!("Out of bounds!"),
+									Some(x) => println!("value = {}", x)
 								}
 							}
 							``` 
@@ -251,7 +262,10 @@
 					</section>
 				</section>
 				<section><h1 class="r-fit-text">PRODUCTIVITY</h1></section>
-				<section data-background-iframe="https://www.rustexplorer.com/b#Zm4gbWFpbigpIHsKCWxldCBtdXQgbmFtZSA9IFN0cmluZzo6ZnJvbSgiSGVyYmVydCIpOwoJbGV0IHJlZmVyZW5jZSA9ICZuYW1lOwoJcHJpbnRfdGV4dChyZWZlcmVuY2UpOwoJYWRkX3NlY29uZF9uYW1lKCZtdXQgbmFtZSk7CglwcmludF90ZXh0KHJlZmVyZW5jZSk7Cn0KCmZuIHByaW50X3RleHQobmFtZTogJlN0cmluZykgewoJcHJpbnRsbiEoInt9IiwgbmFtZSk7Cn0KCmZuIGFkZF9zZWNvbmRfbmFtZShuYW1lOiAmbXV0IFN0cmluZykgewoJbmFtZS5wdXNoX3N0cigiSGFucyIpOwp9"></section>
+				<section>
+					<h2>Fehlernachrichten</h2>
+					<iframe class="r-stretch" data-src="https://www.rustexplorer.com/b#Zm4gbWFpbigpIHsKCWxldCBtdXQgbmFtZSA9IFN0cmluZzo6ZnJvbSgiSGVyYmVydCIpOwoJbGV0IHJlZmVyZW5jZSA9ICZuYW1lOwoJcHJpbnRfdGV4dChyZWZlcmVuY2UpOwoJYWRkX3NlY29uZF9uYW1lKCZtdXQgbmFtZSk7CglwcmludF90ZXh0KHJlZmVyZW5jZSk7Cn0KCmZuIHByaW50X3RleHQobmFtZTogJlN0cmluZykgewoJcHJpbnRsbiEoInt9IiwgbmFtZSk7Cn0KCmZuIGFkZF9zZWNvbmRfbmFtZShuYW1lOiAmbXV0IFN0cmluZykgewoJbmFtZS5wdXNoX3N0cigiSGFucyIpOwp9"></iframe>
+				</section>
 				<section><h1 class="r-fit-text">PRODUCTIVITY</h1></section>
 				<section><h1 class="r-fit-text">SCHLUSS</h1></section>
 				<section>

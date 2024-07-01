@@ -60,19 +60,32 @@ Der Vorteil ggü. Java, Python usw. ist also bessere Performance.
 
 Damit kommen wir zum Thema Reliability.
 
-### Speichermanagment
+### Speichermanagment/Memory Safety
 
 In C++ und C muss man sich als Entwickler selber um den Speicher kümmern. Das bedeutet in der Praxis: Man erstellt eine Variable oder ein Objekt im Speicher - zum Beispiel eine Klasseninstanz in C++. Es wird also der benötigte Speicher im RAM bereitgestellt an einer bestimmten Speicheradresse bereitgestellt. Diese Speicheradresse wird im sogenannten Pointer gespeichert.
 
 Dabei können mehrere Szenarien entstehen, die ein Problem darstellen können:
 
-#### 1. Dangling Pointer
+#### 1. Dangling Pointer / Use After Free
 
-Es können mehrere Pointer auf die gleiche Speicheradresse und somit das gleiche Objekt verweisen. Wenn von einem dieser Pointer das Objekt gelöscht wird, existiert der andere Pointer immernoch. Er "zeigt" jetzt allerdings nicht mehr auf irgendein sinnvolles Objekt. Das kann zu zahlreichen Sicherheitsrisiken führen
+Es können mehrere Pointer auf die gleiche Speicheradresse und somit das gleiche Objekt verweisen. Wenn von einem dieser Pointer das Objekt gelöscht wird, existiert der andere Pointer immernoch. Er "zeigt" jetzt allerdings nicht mehr auf irgendein sinnvolles Objekt. Das kann zu zahlreichen Sicherheitsrisiken führen. Der Speicher könnte jetzt von einer anderen Variable genutzt werden, was eine große Sicherheitslücke ist
 
 #### 2. Memory Leak
 
 Es kann zu einem Memory-Leak kommen, wenn der Pointer vom Programm nicht mehr erreicht werden kann, der eigentliche Inhalt aber noch nicht gelöscht wurde. Dann wird Speicher unnötig verbraucht. Wenn das bei einem Programm oft passiert kann es zu einem Crash kommen.
+
+#### 3. Out of Bounds
+
+Wenn versucht wird, in einem Array Elemente abzurufen, die nicht exisitieren
+
+#### Wichtigkeit
+
+ca. 70% aller Sicherheitslücken werden durch diese Probleme hervorgerufen
+Viele der größten Sicherheitslücken: *WannaCry*, *Trident*, *Heartbleed*, *Stagefright*, etc.
+
+![image](https://msrc.microsoft.com/blog/2019/07/we-need-a-safer-systems-programming-language/wp-content-uploads-2019-07-image-1.png)
+
+
 
 #### Der Ansatz von Rust
 
